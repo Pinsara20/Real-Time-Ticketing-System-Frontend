@@ -1,46 +1,72 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import InputPanel from "./components/InputPanel";
 import TicketDisplay from "./components/TicketDisplay";
 import ActivityLogs from "./components/ActivityLogs";
 
+
 const App = () => {
   const [totalTickets, setTotalTickets] = useState(0);
-  const [vendorRate, setVendorRate] = useState(0);
-  const [customerRate, setCustomerRate] = useState(0);
+  const [vendorRate, setVendorRate] = useState(1); // Default to 1 ticket per operation
+  const [customerRate, setCustomerRate] = useState(1); // Default to 1 ticket per operation
   const [maxCapacity, setMaxCapacity] = useState(0);
   const [currentTickets, setCurrentTickets] = useState(0);
   const [logs, setLogs] = useState([]);
   const [isRunning, setIsRunning] = useState(false);
 
-  useEffect(() => {
-    let interval;
-    if (isRunning) {
-      interval = setInterval(() => {
-        // Vendor adds tickets
-        setCurrentTickets((prev) => {
-          const addedTickets = prev + vendorRate;
-          const newTotal = Math.min(addedTickets, maxCapacity);
-          if (vendorRate > 0) {
-            addLog(`Vendor added ${Math.min(vendorRate, maxCapacity - prev)} tickets.`);
-          }
-          return newTotal;
-        });
-
-        // Customer retrieves tickets
-        setCurrentTickets((prev) => {
-          const deductedTickets = Math.max(prev - customerRate, 0);
-          if (customerRate > 0 && prev > 0) {
-            addLog(`Customer retrieved ${Math.min(customerRate, prev)} tickets.`);
-          }
-          return deductedTickets;
-        });
-      }, 1000);
-    }
-    return () => clearInterval(interval);
-  }, [isRunning, vendorRate, customerRate, maxCapacity]);
+  const vendorInterval = useRef(null);
+  const customerInterval = useRef(null);
 
   const addLog = (message) => {
     setLogs((prevLogs) => [message, ...prevLogs]);
+  };
+
+  const startSystem = () => {
+    if (isRunning) return;
+    setIsRunning(true);
+
+    // Vendor simulation
+    vendorInterval.current = setInterval(() => {
+      setCurrentTickets((prev) => {
+        const newTotal = prev + vendorRate;
+        if (newTotal > maxCapacity) {
+          addLog(
+            `Vendor tried to add ${vendorRate} ticket(s), but capacity reached.`
+          );
+          return maxCapacity;
+        } else {
+          addLog(`Vendor added ${vendorRate} ticket(s). Total: ${newTotal}`);
+          return newTotal;
+        }
+      });
+    }, 1000);
+
+    // Customer simulation
+    customerInterval.current = setInterval(() => {
+      setCurrentTickets((prev) => {
+        if (prev >= customerRate) {
+          const newTotal = prev - customerRate;
+          addLog(
+            `Customer bought ${customerRate} ticket(s). Remaining: ${newTotal}`
+          );
+          return newTotal;
+        } else if (prev > 0) {
+          addLog(
+            `Customer bought ${prev} ticket(s). Remaining: 0`
+          );
+          return 0;
+        } else {
+          addLog("Customer tried to buy tickets, but none are available.");
+          return 0;
+        }
+      });
+    }, 1000);
+  };
+
+  const stopSystem = () => {
+    setIsRunning(false);
+    clearInterval(vendorInterval.current);
+    clearInterval(customerInterval.current);
+    addLog("System stopped.");
   };
 
   const handleAddTickets = () => {
@@ -58,12 +84,14 @@ const App = () => {
 
   const resetConfiguration = () => {
     setTotalTickets(0);
-    setVendorRate(0);
-    setCustomerRate(0);
+    setVendorRate(1);
+    setCustomerRate(1);
     setMaxCapacity(0);
     setCurrentTickets(0);
     setLogs([]);
     setIsRunning(false);
+    clearInterval(vendorInterval.current);
+    clearInterval(customerInterval.current);
     addLog("Configuration reset.");
   };
 
@@ -79,13 +107,16 @@ const App = () => {
         setCustomerRate={setCustomerRate}
         setMaxCapacity={setMaxCapacity}
         handleAddTickets={handleAddTickets}
-        resetConfiguration={resetConfiguration}
-        isRunning={isRunning}
-        setIsRunning={setIsRunning}
       />
       <div className="right-panel">
         <TicketDisplay currentTickets={currentTickets} />
-        <ActivityLogs logs={logs} />
+        <ActivityLogs
+          logs={logs}
+          startSystem={startSystem}
+          stopSystem={stopSystem}
+          resetConfiguration={resetConfiguration}
+          isRunning={isRunning}
+        />
       </div>
     </div>
   );

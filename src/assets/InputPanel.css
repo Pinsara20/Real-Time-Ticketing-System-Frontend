@@ -1,7 +1,37 @@
-.input-panel button {
-    margin-top: 10px;
+.input-panel {
+    width: 40%;
+    background: #f9f9f9;
+    border-right: 2px solid #ddd;
+    padding: 20px;
+  }
+  
+  .input-panel h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  .input-panel label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 15px;
+  }
+  
+  .input-panel input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .input-panel button {
+    margin-top: 15px;
     padding: 10px 15px;
     border: none;
+    background: #4caf50;
+    color: #fff;
     font-size: 16px;
     border-radius: 4px;
     cursor: pointer;
@@ -10,32 +40,5 @@
   
   .input-panel button:hover {
     background: #45a049;
-  }
-  
-  .reset-button {
-    background: #f44336;
-    color: white;
-  }
-  
-  .reset-button:hover {
-    background: #d32f2f;
-  }
-  
-  .start-button {
-    background: #4caf50;
-    color: white;
-  }
-  
-  .start-button:hover {
-    background: #45a049;
-  }
-  
-  .stop-button {
-    background: #f44336;
-    color: white;
-  }
-  
-  .stop-button:hover {
-    background: #d32f2f;
   }
   

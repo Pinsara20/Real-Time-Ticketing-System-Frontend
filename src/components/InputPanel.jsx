@@ -11,9 +11,6 @@ const InputPanel = ({
   setCustomerRate,
   setMaxCapacity,
   handleAddTickets,
-  resetConfiguration,
-  isRunning,
-  setIsRunning,
 }) => {
   return (
     <div className="input-panel">
@@ -51,15 +48,6 @@ const InputPanel = ({
         />
       </label>
       <button onClick={handleAddTickets}>Add Tickets</button>
-      <button onClick={resetConfiguration} className="reset-button">
-        Reset Configuration
-      </button>
-      <button
-        onClick={() => setIsRunning((prev) => !prev)}
-        className={isRunning ? "stop-button" : "start-button"}
-      >
-        {isRunning ? "Stop System" : "Start System"}
-      </button>
     </div>
   );
 };
