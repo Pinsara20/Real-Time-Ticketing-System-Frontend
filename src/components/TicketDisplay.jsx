@@ -6,9 +6,9 @@ const TicketDisplay = ({ currentTickets, maxCapacity }) => {
 
   return (
     <div className="ticket-display">
-      <div className="ticket-info">
-        <h2>Current Tickets</h2>
-        <p>{currentTickets}</p>
+      <div className="ticket-count">
+        <h2 style={{ textAlign: "center", marginBottom: "10px" }}>Current Tickets</h2>
+        <p style={{ fontSize: "20px", fontWeight: "bold" }}>{currentTickets}</p>
       </div>
       <div className="progress-bar">
         <div className="progress" style={{ width: `${progress}%` }}></div>
