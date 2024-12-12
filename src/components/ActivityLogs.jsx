@@ -1,4 +1,5 @@
 import React from "react";
+import "../assets/ActivityLogs.css";
 
 const ActivityLogs = ({ logs, startSystem, stopSystem, resetConfiguration, isRunning }) => {
   return (

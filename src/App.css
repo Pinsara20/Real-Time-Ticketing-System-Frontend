@@ -1,11 +1,108 @@
 .container {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   height: 100vh;
-  font-family: Arial, sans-serif;
+  font-family: 'Roboto', sans-serif;
+  background: #2d587e;
+  color: #333;
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.header {
+  font-size: 3rem;
+  color: #ff6600;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.main-content {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.input-panel {
+  width: 30%;
+  height: 60%;
+  background: linear-gradient(to bottom, #ffffff, #e6f7ff);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-right: 20px;
 }
 
 .right-panel {
-  width: 60%;
+  width: 70%;
   display: flex;
   flex-direction: column;
+  gap: 20px;
+}
+
+.ticket-display {
+  flex: 1;
+  background: linear-gradient(to bottom, #003366, #0056b3);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ticket-display h2 {
+  font-size: 1.5rem;
+  color: #ff6600;
+}
+
+.ticket-display p {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.activity-logs {
+  flex: 2;
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+}
+
+.activity-logs h2 {
+  font-size: 1.5rem;
+  color: #003366;
+  margin-bottom: 15px;
+}
+
+.activity-logs button {
+  padding: 10px 20px;
+  background: #003366;
+  color: #ff6600;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.activity-logs button:hover {
+  background: #002244;
+}
+
+.activity-logs .logs {
+  max-height: 300px;
+  overflow-y: auto;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.activity-logs .logs p {
+  font-size: 14px;
+  margin: 5px 0;
+  color: #555;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 5px;
 }

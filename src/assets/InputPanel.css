@@ -1,44 +1,49 @@
 .input-panel {
-    width: 40%;
-    background: #f9f9f9;
-    border-right: 2px solid #ddd;
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    border-radius: 10px;
     padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
   }
   
   .input-panel h2 {
-    font-size: 20px;
+    font-size: 24px;
     margin-bottom: 15px;
-    color: #333;
+    color: #003366;
+    text-align: center;
+    font-weight: bold;
   }
   
   .input-panel label {
-    display: block;
     font-size: 16px;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
+    color: #666;
   }
   
   .input-panel input {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+    width: 95%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
   }
   
   .input-panel button {
-    margin-top: 15px;
-    padding: 10px 15px;
+    padding: 12px 20px;
     border: none;
-    background: #4caf50;
-    color: #fff;
+    background: #003366;
+    color: #ff6600;
     font-size: 16px;
-    border-radius: 4px;
+    border-radius: 5px;
     cursor: pointer;
-    width: 100%;
+    transition: background 0.3s ease;
   }
   
   .input-panel button:hover {
-    background: #45a049;
+    background: #002244;
   }
-  

@@ -14,7 +14,7 @@ const InputPanel = ({
 }) => {
   return (
     <div className="input-panel">
-      <h2>Input</h2>
+      <h2>Configuration</h2>
       <label>
         Total Tickets:
         <input
